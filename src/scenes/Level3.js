@@ -1,8 +1,8 @@
 import {Player} from "../gameObjects/Player.js";
 
-export class Game extends Phaser.Scene {
+export class Level3 extends Phaser.Scene {
     constructor() {
-        super('Game');
+        super('Level3');
         this.colorIndex = 0;
         this.colors = [
             0xff0000,
@@ -16,14 +16,10 @@ export class Game extends Phaser.Scene {
     }
 
     create() {
-        this.registry.set('currentLevel', 'Game');
+        this.registry.set('currentLevel', 'Level3');
         this.add.image(400, 150, 'sky').setScale(1.5);
         this.platforms = this.physics.add.staticGroup();
         this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-        this.platforms.create(600, 400, 'ground');
-        this.platforms.create(50, 250, 'ground');
-        this.platforms.create(750, 220, 'ground');
-        this.platforms.create(1, 150, 'ground');
         this.player = new Player(this, 100, 450);
         this.physics.add.collider(this.player, this.platforms);
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -78,7 +74,7 @@ export class Game extends Phaser.Scene {
             player.body.setSize(player.width, player.height);
             player.body.setOffset((player.width - oldWidth) / 2, (player.height - oldHeight) / 2);
         }
-        if (this.score >= 30) {
+        if (this.score >= 50) {
             this.physics.pause();
             player.setVisible(false);
             this.time.delayedCall(1000, () => {
@@ -112,4 +108,4 @@ export class Game extends Phaser.Scene {
         bomb.setGravityY(300);
         bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
     }
-}
+} 
